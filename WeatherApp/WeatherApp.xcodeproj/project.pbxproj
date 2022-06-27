@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		483A623C286621E000DDC3AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483A623B286621E000DDC3AE /* AppDelegate.swift */; };
 		483A623E286621E000DDC3AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483A623D286621E000DDC3AE /* SceneDelegate.swift */; };
-		483A6240286621E000DDC3AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483A623F286621E000DDC3AE /* ViewController.swift */; };
+		483A6240286621E000DDC3AE /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483A623F286621E000DDC3AE /* DetailsViewController.swift */; };
 		483A6243286621E000DDC3AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483A6241286621E000DDC3AE /* Main.storyboard */; };
 		483A6245286621E500DDC3AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483A6244286621E500DDC3AE /* Assets.xcassets */; };
 		483A6248286621E500DDC3AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483A6246286621E500DDC3AE /* LaunchScreen.storyboard */; };
@@ -19,13 +19,16 @@
 		485F99D12869155C00DE48C8 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485F99D02869155C00DE48C8 /* Main.swift */; };
 		485F99D728691ECC00DE48C8 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485F99D628691ECC00DE48C8 /* UIImage+Extensions.swift */; };
 		485F99D9286923EE00DE48C8 /* MapView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485F99D8286923EE00DE48C8 /* MapView+Extensions.swift */; };
+		48B600D4286961C1006836BA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B600D3286961C1006836BA /* SearchViewController.swift */; };
+		48B600D62869640B006836BA /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B600D52869640B006836BA /* CityTableViewCell.swift */; };
+		48B600D8286A360C006836BA /* LocationManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B600D7286A360C006836BA /* LocationManager+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		483A6238286621E000DDC3AE /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483A623B286621E000DDC3AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		483A623D286621E000DDC3AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		483A623F286621E000DDC3AE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		483A623F286621E000DDC3AE /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		483A6242286621E000DDC3AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		483A6244286621E500DDC3AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		483A6247286621E500DDC3AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +39,9 @@
 		485F99D02869155C00DE48C8 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		485F99D628691ECC00DE48C8 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		485F99D8286923EE00DE48C8 /* MapView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapView+Extensions.swift"; sourceTree = "<group>"; };
+		48B600D3286961C1006836BA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		48B600D52869640B006836BA /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
+		48B600D7286A360C006836BA /* LocationManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationManager+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,7 @@
 			children = (
 				483A6241286621E000DDC3AE /* Main.storyboard */,
 				483A6246286621E500DDC3AE /* LaunchScreen.storyboard */,
+				48B600D52869640B006836BA /* CityTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -102,7 +109,8 @@
 		485F99D52869165100DE48C8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				483A623F286621E000DDC3AE /* ViewController.swift */,
+				483A623F286621E000DDC3AE /* DetailsViewController.swift */,
+				48B600D3286961C1006836BA /* SearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -113,6 +121,7 @@
 				485F99D628691ECC00DE48C8 /* UIImage+Extensions.swift */,
 				485F99D8286923EE00DE48C8 /* MapView+Extensions.swift */,
 				483A6244286621E500DDC3AE /* Assets.xcassets */,
+				48B600D7286A360C006836BA /* LocationManager+Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -188,15 +197,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48B600D4286961C1006836BA /* SearchViewController.swift in Sources */,
 				485F99D12869155C00DE48C8 /* Main.swift in Sources */,
 				485F99CF2869154C00DE48C8 /* Weather.swift in Sources */,
 				485F99CD2869153900DE48C8 /* Coord.swift in Sources */,
+				48B600D8286A360C006836BA /* LocationManager+Extensions.swift in Sources */,
 				485F99CB2869150B00DE48C8 /* Result.swift in Sources */,
-				483A6240286621E000DDC3AE /* ViewController.swift in Sources */,
+				483A6240286621E000DDC3AE /* DetailsViewController.swift in Sources */,
 				483A623C286621E000DDC3AE /* AppDelegate.swift in Sources */,
 				483A623E286621E000DDC3AE /* SceneDelegate.swift in Sources */,
 				485F99D9286923EE00DE48C8 /* MapView+Extensions.swift in Sources */,
 				485F99D728691ECC00DE48C8 /* UIImage+Extensions.swift in Sources */,
+				48B600D62869640B006836BA /* CityTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@ import MapKit
 
 // custom cell: collection view
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+class DetailsViewController: UIViewController, CLLocationManagerDelegate, MKLocalSearchCompleterDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cityTimeLabel: UILabel!
@@ -30,6 +30,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let locationManager = CLLocationManager()
     
+    var selectedCity: String?
+    
     var currentLocation: CLLocation?
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,11 +40,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getLocation(forPlaceCalled: selectedCity!) { location in
+            guard let location = location else { return }
+            
+            self.currentLocation = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            self.mapView.centerToLocation(self.currentLocation!)
+            self.locationManager.stopUpdatingLocation()
+            self.requestWeatherForLocation()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupLocation()
+        //setupLocation()
     }
     
     func timeZoneToRealTime(timeZone: Int) -> String {
@@ -163,14 +174,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let converted = kelvin - 273.15
         return Int(converted)
     }
-    
-    // MARK: Table
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+ 
+    //MARK: Local Converter
+    func getLocation(forPlaceCalled name: String,
+                     completion: @escaping(CLLocation?) -> Void) {
+        
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(name) { placemarks, error in
+            
+            guard error == nil else {
+                print("*** Error in \(#function): \(error!.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            guard let placemark = placemarks?[0] else {
+                print("*** Error in \(#function): placemark is nil")
+                completion(nil)
+                return
+            }
+            
+            guard let location = placemark.location else {
+                print("*** Error in \(#function): placemark is nil")
+                completion(nil)
+                return
+            }
+
+            completion(location)
+        }
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-    
 }
