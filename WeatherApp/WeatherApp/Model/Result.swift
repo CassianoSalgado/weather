@@ -11,5 +11,6 @@ struct Result: Codable {
     let weather: [Weather]
     let coord: Coord
     let main: Main
-
+    let name: String
+    let timezone: Int
 }

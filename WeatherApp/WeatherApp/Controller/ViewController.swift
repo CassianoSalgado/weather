@@ -7,15 +7,21 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 // custom cell: collection view
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
-    @IBOutlet var table: UITableView!
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
     var models = [Result] ()
     
-    let  locationManager = CLLocationManager()
+    var timeZone = ""
+    
+    let locationManager = CLLocationManager()
     
     var currentLocation: CLLocation?
     
@@ -25,17 +31,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        table.register(HourlyTableViewCell.nib(), forCellReuseIdentifier: HourlyTableViewCell.identifier)
-        table.register(WeatherTableViewCell.nib(), forCellReuseIdentifier: WeatherTableViewCell.identifier)
-        
-        table.delegate = self
-        table.dataSource = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupLocation()
+    }
+    
+    func timeZoneToRealTime(timeZone: Int) -> String {
+        let hours = timeZone/3600
+        let minutes = abs(timeZone/60) % 60
+        let tz = String(format: "%+.2d:%.2d", hours, minutes)
+        print(tz)
+        return tz
     }
     
     // MARK: Location
@@ -49,6 +57,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if !locations.isEmpty, currentLocation == nil {
             currentLocation = locations.first
+            mapView.centerToLocation(currentLocation!)
             locationManager.stopUpdatingLocation()
             requestWeatherForLocation()
         }
@@ -63,7 +72,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let url = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(long)&appid=558b97a543fdd94ab6620fc2a0989e90"
 
-        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
+        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { [self]data, response, error in
             guard let data = data, error == nil else {
                 print("Somenthing went wrong!")
                 return
@@ -82,12 +91,40 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return
             }
             
-            print(result.weather)
+            print(result)
+            
+            self.models.append(result)
+            
+            let weatherData: [Weather] = result.weather
+            
+            UIImage.loadFrom(url: weatherData[0].iconUrl) { image in
+                self.imageView.image = image
+            }
+            
+            timeZone = timeZoneToRealTime(timeZone: result.timezone)
+            
+            let dateTest = localDate(timeZone: result.timezone)
             
             // MARK: Upadate user interface
             
         }).resume()
         
+    }
+    
+    func localDate(timeZone: Int) -> Date {
+        let nowUTC = Date()
+        let timeZoneOffset = timeZone
+        guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: nowUTC) else {return Date()}
+        
+        let dateFormatter  = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        dateFormatter.dateFormat = "HH:mm"
+        let convertedDate = dateFormatter.string(from: localDate)
+        
+        print("Local Date: \(localDate)")
+        print("Converted Date: \(convertedDate)")
+        
+        return localDate
     }
     
     // MARK: Table
