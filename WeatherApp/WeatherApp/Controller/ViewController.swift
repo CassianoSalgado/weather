@@ -14,7 +14,14 @@ import MapKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
-    
+    @IBOutlet weak var cityTimeLabel: UILabel!
+    @IBOutlet weak var cityNameLabel: UILabel!
+    @IBOutlet weak var currentTempertureLabel: UILabel!
+    @IBOutlet weak var minimalTempertureLabel: UILabel!
+    @IBOutlet weak var maximunTempertureLabel: UILabel!
+    @IBOutlet weak var currentPressureLabel: UILabel!
+    @IBOutlet weak var currentHumidityLabel: UILabel!
+    @IBOutlet weak var currentWeatherDescriptionLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
     var models = [Result] ()
@@ -101,9 +108,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.imageView.image = image
             }
             
-            timeZone = timeZoneToRealTime(timeZone: result.timezone)
-            
-            let dateTest = localDate(timeZone: result.timezone)
+            DispatchQueue.main.async{
+                self.timeZone = self.timeZoneToRealTime(timeZone: result.timezone)
+                
+                let dateTest = self.localDate(timeZone: result.timezone)
+                
+                self.cityTimeLabel.text = "\(dateTest)"
+                
+                self.cityNameLabel.text = "\(result.name)"
+                
+                self.currentWeatherDescriptionLabel.text = "\(result.weather[0].description)"
+                
+                let currentTemperature = self.convertToCelsius(kelvin: result.main.temp)
+                
+                let currentMinTemperature = self.convertToCelsius(kelvin: result.main.temp_min)
+                
+                let currentMaxTemperature = self.convertToCelsius(kelvin: result.main.temp_max)
+                
+                self.currentTempertureLabel.text = "\(currentTemperature)º"
+                
+                self.minimalTempertureLabel.text = "\(currentMinTemperature)º"
+                
+                self.maximunTempertureLabel.text = "\(currentMaxTemperature)º"
+                
+                self.currentHumidityLabel.text = "\(result.main.humidity)%"
+                
+                self.currentPressureLabel.text = "\(result.main.pressure)"
+                
+            }
             
             // MARK: Upadate user interface
             
@@ -111,10 +143,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-    func localDate(timeZone: Int) -> Date {
+    func localDate(timeZone: Int) -> String {
         let nowUTC = Date()
         let timeZoneOffset = timeZone
-        guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: nowUTC) else {return Date()}
+        guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: nowUTC) else {return String()}
         
         let dateFormatter  = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
@@ -124,7 +156,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print("Local Date: \(localDate)")
         print("Converted Date: \(convertedDate)")
         
-        return localDate
+        return convertedDate
+    }
+    
+    func convertToCelsius(kelvin: Float) -> Int {
+        let converted = kelvin - 273.15
+        return Int(converted)
     }
     
     // MARK: Table
