@@ -1,5 +1,3 @@
-# weather
-
 ![Logo](https://github.com/CassianoSalgado/weather/blob/main/Icon.png?raw=true)
 
 # Weather App
