@@ -21,7 +21,6 @@
 		485F99D9286923EE00DE48C8 /* MapView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485F99D8286923EE00DE48C8 /* MapView+Extensions.swift */; };
 		48B600D4286961C1006836BA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B600D3286961C1006836BA /* SearchViewController.swift */; };
 		48B600D62869640B006836BA /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B600D52869640B006836BA /* CityTableViewCell.swift */; };
-		48B600D8286A360C006836BA /* LocationManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B600D7286A360C006836BA /* LocationManager+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +40,6 @@
 		485F99D8286923EE00DE48C8 /* MapView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapView+Extensions.swift"; sourceTree = "<group>"; };
 		48B600D3286961C1006836BA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		48B600D52869640B006836BA /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
-		48B600D7286A360C006836BA /* LocationManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationManager+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +119,6 @@
 				485F99D628691ECC00DE48C8 /* UIImage+Extensions.swift */,
 				485F99D8286923EE00DE48C8 /* MapView+Extensions.swift */,
 				483A6244286621E500DDC3AE /* Assets.xcassets */,
-				48B600D7286A360C006836BA /* LocationManager+Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -201,7 +198,6 @@
 				485F99D12869155C00DE48C8 /* Main.swift in Sources */,
 				485F99CF2869154C00DE48C8 /* Weather.swift in Sources */,
 				485F99CD2869153900DE48C8 /* Coord.swift in Sources */,
-				48B600D8286A360C006836BA /* LocationManager+Extensions.swift in Sources */,
 				485F99CB2869150B00DE48C8 /* Result.swift in Sources */,
 				483A6240286621E000DDC3AE /* DetailsViewController.swift in Sources */,
 				483A623C286621E000DDC3AE /* AppDelegate.swift in Sources */,
